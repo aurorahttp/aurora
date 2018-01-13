@@ -1,5 +1,5 @@
 {
-    "name": "panlatent/http-factory",
+    "name": "panlatent/http-parser",
     "description": "HTTP request parser and factories that create PSR-7 compliant HTTP objects",
     "type": "library",
     "require": {
@@ -21,7 +21,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Panlatent\\Http\\Factory\\": "src/"
+            "Panlatent\\Http\\Parser\\": "src/"
         }
     }
 }
