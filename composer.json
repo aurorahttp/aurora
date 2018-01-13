@@ -1,11 +1,12 @@
 {
-    "name": "panlatent/http-factories",
+    "name": "panlatent/http-factory",
     "description": "HTTP request parser and factories that create PSR-7 compliant HTTP objects",
     "type": "library",
     "require": {
         "php": ">=5.5",
         "psr/http-message": "^1.0",
-        "fig/http-message-util": "^1.1"
+        "fig/http-message-util": "^1.1",
+        "http-interop/http-factory": "^0.3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.0"
@@ -20,7 +21,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Panlatent\\Http\\Factories\\": "src/"
+            "Panlatent\\Http\\Factory\\": "src/"
         }
     }
 }
