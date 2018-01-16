@@ -40,6 +40,10 @@ class RequestStream
      * @var RawRequestOptions
      */
     protected $options;
+    /**
+     * @var int
+     */
+    protected $bodyLength;
 
     /**
      * RequestStream constructor.
@@ -92,6 +96,8 @@ class RequestStream
                 $writtenLength = fwrite($this->headerBuffer, substr($content, 0, $pos));
                 $this->messageStatus = static::MSG_HEAD_DOING;
 
+                $this->triggerEvent($this->options->headerReadyEvent);
+
                 return $writtenLength + strlen(static::HTTP_MESSAGE_HEADER_ENDING);
             }
         } elseif ($this->messageStatus == static::MSG_BODY_DOING) {
@@ -99,6 +105,14 @@ class RequestStream
              * Write request body.
              */
             $writtenLength = fwrite($this->bodyBuffer, $content);
+            $this->bodyLength += $writtenLength;
+            $headers = $this->getStandardHeaders();
+            if (isset($headers['Content-Length'])) {
+                if ($this->bodyLength >= $headers['Content-Length']) {
+                    $this->messageStatus = static::MSG_BODY_DONE;
+                    $this->triggerEvent($this->options->bodyReadEvent);
+                }
+            }
 
             return $writtenLength;
         }
@@ -234,6 +248,11 @@ class RequestStream
     }
 
     /**
+     * @var array
+     */
+    private $standardHeaders;
+
+    /**
      * Returns an array of contains all request headers.
      *
      * Each different name header has only one.
@@ -243,16 +262,19 @@ class RequestStream
      */
     public function getStandardHeaders()
     {
-        $standardHeaders = [];
-        foreach ($this->getHeaders() as list($name, $value)) {
-            if (! isset($standardHeaders[$name])) {
-                $standardHeaders[$name] = $value;
-            } else {
-                $standardHeaders[$name] .= ', ' . $value;
+        if ($this->standardHeaders === null) {
+            $standardHeaders = [];
+            foreach ($this->getHeaders() as list($name, $value)) {
+                if (! isset($standardHeaders[$name])) {
+                    $standardHeaders[$name] = $value;
+                } else {
+                    $standardHeaders[$name] .= ', ' . $value;
+                }
             }
+            $this->standardHeaders = $standardHeaders;
         }
 
-        return $standardHeaders;
+        return $this->standardHeaders;
     }
 
     /**
@@ -284,7 +306,11 @@ class RequestStream
      */
     public function isReadable()
     {
-        return false;
+        if ($this->messageStatus < static::MSG_HEAD_DONE) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -292,6 +318,13 @@ class RequestStream
      */
     public function isWritable()
     {
+        if ($this->messageStatus < static::MSG_LINE_DOING) {
+            return true;
+        }
+        if (in_array($this->getMethod(), $this->options->withoutBodyMethods)) {
+            return $this->messageStatus != static::MSG_HEAD_DONE;
+        }
+
         return $this->messageStatus != static::MSG_BODY_DONE;
     }
 
@@ -313,7 +346,18 @@ class RequestStream
             $this->messageStatus = static::MSG_HEAD_DOING;
         } elseif ($this->messageStatus == static::MSG_BODY_WAITING) {
             $this->bodyBuffer = fopen('php://temp', 'r+');
+            $this->bodyLength = 0;
             $this->messageStatus = static::MSG_BODY_DOING;
+        }
+    }
+
+    /**
+     * @param callable $callback
+     */
+    private function triggerEvent($callback)
+    {
+        if ($callback) {
+            call_user_func($callback, $this);
         }
     }
 }

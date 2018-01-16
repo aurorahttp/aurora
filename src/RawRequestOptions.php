@@ -33,4 +33,12 @@ class RawRequestOptions
      * @var int
      */
     public $headerLineMaxLength = 8192;
+    /**
+     * @var callable|null
+     */
+    public $headerReadyEvent;
+    /**
+     * @var callable|null
+     */
+    public $bodyReadEvent;
 }
