@@ -8,6 +8,8 @@ HTTP Raw Message
 
 Parse raw request message and release raw response message.
 
+ > ! The HTTP 2.0 part is under development and not yet supported.
+
 ## License
 
 The HTTP Raw Message is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
