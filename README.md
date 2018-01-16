@@ -1,13 +1,13 @@
-HTTP Parser
-============
-[![Build Status](https://travis-ci.org/panlatent/http-parser.svg)](https://travis-ci.org/panlatent/http-parser)
-[![Latest Stable Version](https://poser.pugx.org/panlatent/http-parser/v/stable.svg)](https://packagist.org/packages/panlatent/http-parser)
-[![Total Downloads](https://poser.pugx.org/panlatent/http-parser/downloads.svg)](https://packagist.org/packages/panlatent/http-parser) 
-[![Latest Unstable Version](https://poser.pugx.org/panlatent/http-parser/v/unstable.svg)](https://packagist.org/packages/panlatent/http-parser)
-[![License](https://poser.pugx.org/panlatent/http-parser/license.svg)](https://packagist.org/packages/panlatent/http-parser)
+HTTP Raw Message
+================
+[![Build Status](https://travis-ci.org/panlatent/http-raw-message.svg)](https://travis-ci.org/panlatent/http-raw-message)
+[![Latest Stable Version](https://poser.pugx.org/panlatent/http-raw-message/v/stable.svg)](https://packagist.org/packages/panlatent/http-raw-message)
+[![Total Downloads](https://poser.pugx.org/panlatent/http-raw-message/downloads.svg)](https://packagist.org/packages/panlatent/http-raw-message) 
+[![Latest Unstable Version](https://poser.pugx.org/panlatent/http-raw-message/v/unstable.svg)](https://packagist.org/packages/panlatent/http-raw-message)
+[![License](https://poser.pugx.org/panlatent/http-raw-message/license.svg)](https://packagist.org/packages/panlatent/http-raw-message)
 
-HTTP request parser and factories that create PSR-7 compliant HTTP objects.
+Parse raw request message and release raw response message.
 
 ## License
 
-The HTTP Parser is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The HTTP Raw Message is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
