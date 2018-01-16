@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Panlatent\Http\RawMessage\Request\RawMessageBodyException;
 use Panlatent\Http\RawMessage\RequestStream;
 use PHPUnit\Framework\TestCase;
 
@@ -47,6 +48,19 @@ class RequestStreamTest extends TestCase
         $headers = $stream->getStandardHeaders();
         $this->assertArrayHasKey('Host', $headers);
         $this->assertEquals('www.laruence.com', $headers['Host']);
+    }
+
+    public function testGetBodyContent()
+    {
+        $stream = new RequestStream();
+        $this->assertEquals('', $stream->getBodyContent());
+    }
+
+    public function testGetBodyStreamContent()
+    {
+        $this->expectException(RawMessageBodyException::class);
+        $stream = new RequestStream();
+        $this->assertEquals('', $stream->getBodyStream());
     }
 
     private function getRequestStream()

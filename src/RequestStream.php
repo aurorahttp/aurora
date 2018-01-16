@@ -2,6 +2,7 @@
 
 namespace Panlatent\Http\RawMessage;
 
+use Panlatent\Http\RawMessage\Request\RawMessageBodyException;
 use Panlatent\Http\RawMessage\Request\RawMessageHeaderException;
 use Panlatent\Http\RawMessage\Stream\WriteException;
 
@@ -259,6 +260,10 @@ class RequestStream
      */
     public function getBodyContent()
     {
+        if ($this->bodyBuffer === null) {
+            return '';
+        }
+
         return stream_get_contents($this->bodyBuffer, -1, 0);
     }
 
@@ -267,6 +272,10 @@ class RequestStream
      */
     public function getBodyStream()
     {
+        if ($this->bodyBuffer === null) {
+            throw new RawMessageBodyException('Body stream does not exist');
+        }
+
         return $this->bodyBuffer;
     }
 
