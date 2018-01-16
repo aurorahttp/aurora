@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlatent\Http\RawMessage;
+namespace Panlatent\Http\Server;
 
-class RawRequestOptions
+class RequestStreamOptions
 {
     /**
      * @var int Allow http method length.

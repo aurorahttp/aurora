@@ -1,10 +1,10 @@
 <?php
 
-namespace Panlatent\Http\RawMessage;
+namespace Panlatent\Http\Server;
 
-use Panlatent\Http\RawMessage\Request\RawMessageBodyException;
-use Panlatent\Http\RawMessage\Request\RawMessageHeaderException;
-use Panlatent\Http\RawMessage\Stream\WriteException;
+use Panlatent\Http\Server\Request\MessageBodyException;
+use Panlatent\Http\Server\Request\MessageHeaderException;
+use Panlatent\Http\Server\Stream\WriteException;
 
 class RequestStream
 {
@@ -37,7 +37,7 @@ class RequestStream
      */
     protected $bodyBuffer;
     /**
-     * @var RawRequestOptions
+     * @var RequestStreamOptions
      */
     protected $options;
     /**
@@ -48,12 +48,12 @@ class RequestStream
     /**
      * RequestStream constructor.
      *
-     * @param RawRequestOptions|null $options
+     * @param RequestStreamOptions|null $options
      */
-    public function __construct(RawRequestOptions $options = null)
+    public function __construct(RequestStreamOptions $options = null)
     {
         if ($options === null) {
-            $this->options = new RawRequestOptions();
+            $this->options = new RequestStreamOptions();
         } else {
             $this->options = $options;
         }
@@ -142,7 +142,7 @@ class RequestStream
             fseek($this->lineBuffer, 0);
             $part = fread($this->lineBuffer, $this->options->methodMaxLength + 1);
             if (false === ($pos = strpos($part, ' '))) {
-                throw new RawMessageHeaderException('Unrecognized http request method');
+                throw new MessageHeaderException('Unrecognized http request method');
             }
             $this->method = substr($part, 0, $pos);
         }
@@ -168,7 +168,7 @@ class RequestStream
             fseek($this->lineBuffer, -($this->options->versionMaxLength + 1), SEEK_END);
             $part = fread($this->lineBuffer, $this->options->versionMaxLength + 1);
             if (false === ($rightPos = strrpos($part, ' '))) {
-                throw new RawMessageHeaderException('Unrecognized http request version');
+                throw new MessageHeaderException('Unrecognized http request version');
             }
             $this->version = substr($part, $rightPos + 1);
         }
@@ -295,7 +295,7 @@ class RequestStream
     public function getBodyStream()
     {
         if ($this->bodyBuffer === null) {
-            throw new RawMessageBodyException('Body stream does not exist');
+            throw new MessageBodyException('Body stream does not exist');
         }
 
         return $this->bodyBuffer;

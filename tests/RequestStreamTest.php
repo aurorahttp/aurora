@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Panlatent\Http\RawMessage\Request\RawMessageBodyException;
-use Panlatent\Http\RawMessage\RequestStream;
+use Panlatent\Http\Server\Request\MessageBodyException;
+use Panlatent\Http\Server\RequestStream;
 use PHPUnit\Framework\TestCase;
 
 class RequestStreamTest extends TestCase
@@ -58,7 +58,7 @@ class RequestStreamTest extends TestCase
 
     public function testGetBodyStreamContent()
     {
-        $this->expectException(RawMessageBodyException::class);
+        $this->expectException(MessageBodyException::class);
         $stream = new RequestStream();
         $this->assertEquals('', $stream->getBodyStream());
     }

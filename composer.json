@@ -1,5 +1,5 @@
 {
-    "name": "panlatent/http-raw-message",
+    "name": "panlatent/http-server-stream",
     "description": "Parse raw request message and release raw response message",
     "type": "library",
     "require": {
@@ -20,7 +20,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Panlatent\\Http\\RawMessage\\": "src/"
+            "Panlatent\\Http\\Server\\": "src/"
         }
     },
     "extra": {

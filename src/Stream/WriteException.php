@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlatent\Http\RawMessage\Stream;
+namespace Panlatent\Http\Server\Stream;
 
-use Panlatent\Http\RawMessage\StreamException;
+use Panlatent\Http\Server\StreamException;
 
 class WriteException extends StreamException
 {
