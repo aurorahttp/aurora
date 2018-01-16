@@ -2,6 +2,7 @@
 
 namespace Panlatent\Http\Server;
 
+use BadMethodCallException;
 use Panlatent\Http\Server\Request\MessageBodyException;
 use Panlatent\Http\Server\Request\MessageHeaderException;
 use Panlatent\Http\Server\Stream\WriteException;
@@ -326,6 +327,30 @@ class RequestStream
         }
 
         return $this->messageStatus != static::MSG_BODY_DONE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWithBody()
+    {
+        if ($this->messageStatus < static::MSG_LINE_DOING) {
+            throw new BadMethodCallException('Request line unknown');
+        }
+
+        return in_array($this->getMethod(), $this->options->withBodyMethods);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWithoutBody()
+    {
+        if ($this->messageStatus < static::MSG_LINE_DOING) {
+            throw new BadMethodCallException('Request line unknown');
+        }
+
+        return in_array($this->getMethod(), $this->options->withoutBodyMethods);
     }
 
     /**
