@@ -3,13 +3,11 @@
 namespace Panlatent\Http\Message\Decoder;
 
 use BadMethodCallException;
+use Panlatent\Http\Message\CodecStreamInterface;
 use Panlatent\Http\Message\Decoder\Stream\WriteException;
 
-class Stream
+class Stream implements CodecStreamInterface
 {
-    const HTTP_MESSAGE_LINE_ENDING = "\r\n";
-    const HTTP_MESSAGE_HEADER_ENDING = "\r\n\r\n";
-
     const MSG_LINE_WAITING = 1;
     const MSG_LINE_DOING = 2;
     const MSG_HEAD_WAITING = 4;
@@ -299,6 +297,66 @@ class Stream
         }
 
         return $this->bodyBuffer;
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+    }
+
+    public function close()
+    {
+        // TODO: Implement close() method.
+    }
+
+    public function detach()
+    {
+        // TODO: Implement detach() method.
+    }
+
+    public function getSize()
+    {
+        // TODO: Implement getSize() method.
+    }
+
+    public function tell()
+    {
+        // TODO: Implement tell() method.
+    }
+
+    public function eof()
+    {
+        // TODO: Implement eof() method.
+    }
+
+    public function isSeekable()
+    {
+        // TODO: Implement isSeekable() method.
+    }
+
+    public function seek($offset, $whence = SEEK_SET)
+    {
+        // TODO: Implement seek() method.
+    }
+
+    public function rewind()
+    {
+        // TODO: Implement rewind() method.
+    }
+
+    public function read($length)
+    {
+        // TODO: Implement read() method.
+    }
+
+    public function getContents()
+    {
+        // TODO: Implement getContents() method.
+    }
+
+    public function getMetadata($key = null)
+    {
+        // TODO: Implement getMetadata() method.
     }
 
     /**

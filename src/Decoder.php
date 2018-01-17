@@ -33,7 +33,8 @@ class Decoder
     }
 
     /**
-     * Decode a stream to request
+     * Decode a stream to request.
+     *
      * @param Stream $stream
      * @return ServerRequestInterface
      * @throws DecoderException
