@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlatent\Http\Server;
+namespace Panlatent\Http\Message\Decoder;
 
-class RequestStreamOptions
+class StreamOptions
 {
     /**
      * @var int Allow http method length.

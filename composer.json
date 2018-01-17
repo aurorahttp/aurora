@@ -1,11 +1,12 @@
 {
-    "name": "panlatent/http-server-stream",
-    "description": "Parse raw request message and release raw response message",
+    "name": "panlatent/http-message-codec",
+    "description": "Decode raw request message and encode raw response message",
     "type": "library",
     "require": {
         "php": ">=7.0",
-        "psr/http-message": "^1.0",
-        "panlatent/http-foundation": "~1.0"
+        "psr/http-message": "~1.0",
+        "panlatent/http-foundation": "~1.0",
+        "http-interop/http-factory": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
@@ -20,7 +21,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Panlatent\\Http\\Server\\": "src/"
+            "Panlatent\\Http\\Message\\": "src/"
         }
     },
     "extra": {

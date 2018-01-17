@@ -1,13 +1,11 @@
 <?php
 
-namespace Panlatent\Http\Server;
+namespace Panlatent\Http\Message\Decoder;
 
 use BadMethodCallException;
-use Panlatent\Http\Server\Request\MessageBodyException;
-use Panlatent\Http\Server\Request\MessageHeaderException;
-use Panlatent\Http\Server\Stream\WriteException;
+use Panlatent\Http\Message\Decoder\Stream\WriteException;
 
-class RequestStream
+class Stream
 {
     const HTTP_MESSAGE_LINE_ENDING = "\r\n";
     const HTTP_MESSAGE_HEADER_ENDING = "\r\n\r\n";
@@ -38,7 +36,7 @@ class RequestStream
      */
     protected $bodyBuffer;
     /**
-     * @var RequestStreamOptions
+     * @var StreamOptions
      */
     protected $options;
     /**
@@ -49,12 +47,12 @@ class RequestStream
     /**
      * RequestStream constructor.
      *
-     * @param RequestStreamOptions|null $options
+     * @param StreamOptions|null $options
      */
-    public function __construct(RequestStreamOptions $options = null)
+    public function __construct(StreamOptions $options = null)
     {
         if ($options === null) {
-            $this->options = new RequestStreamOptions();
+            $this->options = new StreamOptions();
         } else {
             $this->options = $options;
         }
@@ -257,7 +255,8 @@ class RequestStream
      * Returns an array of contains all request headers.
      *
      * Each different name header has only one.
-     * @see RequestStream::getHeaders()
+     *
+     * @see Stream::getHeaders()
      *
      * @return array
      */

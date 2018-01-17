@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Panlatent\Http\Server\Request\MessageBodyException;
-use Panlatent\Http\Server\RequestStream;
+use Panlatent\Http\Message\Decoder\MessageBodyException;
+use Panlatent\Http\Message\Decoder\Stream;
 use PHPUnit\Framework\TestCase;
 
 class RequestStreamTest extends TestCase
@@ -11,7 +11,7 @@ class RequestStreamTest extends TestCase
     public function testWriteViaGet()
     {
         $stream = $this->getRequestStream();
-        $this->assertEquals(RequestStream::MSG_HEAD_DOING, $stream->getMessageStatus());
+        $this->assertEquals(Stream::MSG_HEAD_DOING, $stream->getMessageStatus());
         $this->assertAttributeNotEmpty('lineBuffer', $stream);
         $this->assertAttributeNotEmpty('headerBuffer', $stream);
         $this->assertAttributeEmpty('bodyBuffer', $stream);
@@ -52,20 +52,20 @@ class RequestStreamTest extends TestCase
 
     public function testGetBodyContent()
     {
-        $stream = new RequestStream();
+        $stream = new Stream();
         $this->assertEquals('', $stream->getBodyContent());
     }
 
     public function testGetBodyStreamContent()
     {
         $this->expectException(MessageBodyException::class);
-        $stream = new RequestStream();
+        $stream = new Stream();
         $this->assertEquals('', $stream->getBodyStream());
     }
 
     private function getRequestStream()
     {
-        $stream = new RequestStream();
+        $stream = new Stream();
         $fp = fopen(__DIR__ . '/data/request_get.http', 'r');
         for (; ! feof($fp);) {
             $part = fread($fp, 30);
