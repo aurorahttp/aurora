@@ -6,7 +6,7 @@ HTTP Message Codec
 [![Latest Unstable Version](https://poser.pugx.org/panlatent/http-message-codec/v/unstable.svg)](https://packagist.org/packages/panlatent/http-message-codec)
 [![License](https://poser.pugx.org/panlatent/http-message-codec/license.svg)](https://packagist.org/packages/panlatent/http-message-codec)
 
-Decode raw request message and encode raw response message.
+Decode raw request message and encode PRS-7 response object.
 
  > ! The HTTP 2.0 part is under development and not yet supported.
 
