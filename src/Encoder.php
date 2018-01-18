@@ -6,6 +6,11 @@ use Panlatent\Http\Message\Encoder\AdapterInterface;
 use Panlatent\Http\Message\Encoder\Stream;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Encoder encode response object to raw HTTP message.
+ *
+ * @author Panlatent <panlatent@gmail.com>
+ */
 class Encoder
 {
     /**

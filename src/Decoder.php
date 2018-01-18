@@ -7,6 +7,11 @@ use Panlatent\Http\Message\Decoder\Context;
 use Panlatent\Http\Message\Decoder\Stream;
 use Psr\Http\Message\ServerRequestInterface;
 
+/**
+ * Decoder decode raw HTTP message to ServerRequest object.
+ *
+ * @author Panlatent <panlatent@gmail.com>
+ */
 class Decoder
 {
     /**
