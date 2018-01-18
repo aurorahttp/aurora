@@ -2,10 +2,9 @@
 
 namespace Panlatent\Http\Message\Decoder;
 
-use Interop\Http\Factory\ServerRequestFactoryInterface;
 use Panlatent\Http\Message\Decoder;
 
-interface AdapterInterface extends ServerRequestFactoryInterface
+interface AdapterInterface
 {
     /**
      * Bind decoder and stream to this object.
