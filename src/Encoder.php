@@ -3,6 +3,7 @@
 namespace Panlatent\Http\Message;
 
 use Panlatent\Http\Message\Encoder\AdapterInterface;
+use Panlatent\Http\Message\Encoder\GeneralAdapter;
 use Panlatent\Http\Message\Encoder\Stream;
 use Psr\Http\Message\ResponseInterface;
 
@@ -34,6 +35,9 @@ class Encoder
      */
     public function getAdapter(): AdapterInterface
     {
+        if ($this->adapter === null) {
+            $this->adapter = new GeneralAdapter();
+        }
         return $this->adapter;
     }
 
