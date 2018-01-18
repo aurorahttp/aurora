@@ -3,10 +3,11 @@
 namespace Panlatent\Http\Message\Decoder;
 
 use BadMethodCallException;
+use Panlatent\ContextSensitiveInterface;
 use Panlatent\Http\Message\CodecStreamInterface;
 use Panlatent\Http\Message\Decoder\Stream\WriteException;
 
-class Stream implements CodecStreamInterface
+class Stream implements CodecStreamInterface, ContextSensitiveInterface
 {
     const MSG_LINE_WAITING = 1;
     const MSG_LINE_DOING = 2;
@@ -351,6 +352,14 @@ class Stream implements CodecStreamInterface
     public function getMetadata($key = null)
     {
         // TODO: Implement getMetadata() method.
+    }
+
+    /**
+     * @return StreamContext
+     */
+    public function getContext()
+    {
+        return $this->context;
     }
 
     /**
