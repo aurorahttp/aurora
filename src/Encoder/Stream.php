@@ -47,8 +47,8 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
     {
         $this->prepare();
 
-        $writtenLength = fwrite($this->buffer, $content, $this->context->bufferSize);
-        if (ftell($this->buffer) >= $this->context->bufferSize) {
+        $writtenLength = fwrite($this->buffer, $content, $this->context->bufferWriteSize);
+        if (ftell($this->buffer) >= $this->context->bufferWriteSize) {
             $this->context->bufferFlushReady();
         }
 
@@ -124,12 +124,14 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
 
     public function read($length)
     {
-        // TODO: Implement read() method.
+        return fread($this->buffer, $length);
     }
 
     public function getContents()
     {
-        // TODO: Implement getContents() method.
+        return $this->getBufferContent()
+            .  static::HTTP_MESSAGE_HEADER_ENDING
+            . $this->bodyStream->getContents();
     }
 
     public function getMetadata($key = null)
@@ -156,8 +158,8 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
     public function getBufferContent()
     {
         $content = '';
-        while ( ! feof($this->buffer)) {
-            $content .= fread($this->buffer, $this->context->bufferSize);
+        for (fseek($this->buffer, 0); ! feof($this->buffer); ) {
+            $content .= fread($this->buffer, $this->context->bufferWriteSize);
         }
 
         return $content;
