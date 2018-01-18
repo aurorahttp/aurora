@@ -10,7 +10,7 @@ class GeneralAdapter implements AdapterInterface
 {
     public function createStream(Encoder $encoder, ResponseInterface $response): Stream
     {
-        $stream = new Stream();
+        $stream = $this->getStream();
         $stream->writeln(implode(' ',
             [
                 'HTTP/' . $response->getProtocolVersion(),
@@ -25,5 +25,10 @@ class GeneralAdapter implements AdapterInterface
         $stream->withBodyStream($response->getBody());
 
         return $stream;
+    }
+
+    protected function getStream()
+    {
+        return new Stream();
     }
 }

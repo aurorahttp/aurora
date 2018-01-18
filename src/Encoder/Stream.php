@@ -145,6 +145,24 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
         return $this->context;
     }
 
+    /**
+     * @return resource
+     */
+    public function getBuffer(): resource
+    {
+        return $this->buffer;
+    }
+
+    public function getBufferContent()
+    {
+        $content = '';
+        while ( ! feof($this->buffer)) {
+            $content .= fread($this->buffer, $this->context->bufferSize);
+        }
+
+        return $content;
+    }
+
     public function getStatusCode()
     {
         return 200;
