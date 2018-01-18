@@ -79,7 +79,7 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
 
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+        return '';
     }
 
     public function close()
