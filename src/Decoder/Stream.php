@@ -34,9 +34,9 @@ class Stream implements CodecStreamInterface
      */
     protected $bodyBuffer;
     /**
-     * @var StreamOptions
+     * @var StreamContext
      */
-    protected $options;
+    protected $context;
     /**
      * @var int
      */
@@ -44,16 +44,10 @@ class Stream implements CodecStreamInterface
 
     /**
      * RequestStream constructor.
-     *
-     * @param StreamOptions|null $options
      */
-    public function __construct(StreamOptions $options = null)
+    public function __construct()
     {
-        if ($options === null) {
-            $this->options = new StreamOptions();
-        } else {
-            $this->options = $options;
-        }
+        $this->context = new StreamContext();
         $this->messageStatus = static::MSG_LINE_WAITING;
     }
 
@@ -93,7 +87,7 @@ class Stream implements CodecStreamInterface
                 $writtenLength = fwrite($this->headerBuffer, substr($content, 0, $pos));
                 $this->messageStatus = static::MSG_HEAD_DOING;
 
-                $this->triggerEvent($this->options->headerReadyEvent);
+                $this->context->headerReady();
 
                 return $writtenLength + strlen(static::HTTP_MESSAGE_HEADER_ENDING);
             }
@@ -107,7 +101,7 @@ class Stream implements CodecStreamInterface
             if (isset($headers['Content-Length'])) {
                 if ($this->bodyLength >= $headers['Content-Length']) {
                     $this->messageStatus = static::MSG_BODY_DONE;
-                    $this->triggerEvent($this->options->bodyReadEvent);
+                    $this->context->bodyReady();
                 }
             }
 
@@ -137,7 +131,7 @@ class Stream implements CodecStreamInterface
     {
         if ($this->method === null) {
             fseek($this->lineBuffer, 0);
-            $part = fread($this->lineBuffer, $this->options->methodMaxLength + 1);
+            $part = fread($this->lineBuffer, $this->context->methodMaxLength + 1);
             if (false === ($pos = strpos($part, ' '))) {
                 throw new MessageHeaderException('Unrecognized http request method');
             }
@@ -162,8 +156,8 @@ class Stream implements CodecStreamInterface
     public function getVersion(): string
     {
         if ($this->version === null) {
-            fseek($this->lineBuffer, -($this->options->versionMaxLength + 1), SEEK_END);
-            $part = fread($this->lineBuffer, $this->options->versionMaxLength + 1);
+            fseek($this->lineBuffer, -($this->context->versionMaxLength + 1), SEEK_END);
+            $part = fread($this->lineBuffer, $this->context->versionMaxLength + 1);
             if (false === ($rightPos = strrpos($part, ' '))) {
                 throw new MessageHeaderException('Unrecognized http request version');
             }
@@ -226,7 +220,7 @@ class Stream implements CodecStreamInterface
         for (rewind($this->headerBuffer); ! feof($this->headerBuffer);) {
             $line = stream_get_line(
                 $this->headerBuffer,
-                $this->options->headerLineMaxLength,
+                $this->context->headerLineMaxLength,
                 static::HTTP_MESSAGE_LINE_ENDING);
             $line = (array)explode(':', $line, 2);
             if (count($line) == 2) {
@@ -301,7 +295,7 @@ class Stream implements CodecStreamInterface
 
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+        return '';
     }
 
     public function close()
@@ -379,7 +373,7 @@ class Stream implements CodecStreamInterface
         if ($this->messageStatus < static::MSG_LINE_DOING) {
             return true;
         }
-        if (in_array($this->getMethod(), $this->options->withoutBodyMethods)) {
+        if (in_array($this->getMethod(), $this->context->withoutBodyMethods)) {
             return $this->messageStatus != static::MSG_HEAD_DONE;
         }
 
@@ -395,7 +389,7 @@ class Stream implements CodecStreamInterface
             throw new BadMethodCallException('Request line unknown');
         }
 
-        return in_array($this->getMethod(), $this->options->withBodyMethods);
+        return in_array($this->getMethod(), $this->context->withBodyMethods);
     }
 
     /**
@@ -407,7 +401,7 @@ class Stream implements CodecStreamInterface
             throw new BadMethodCallException('Request line unknown');
         }
 
-        return in_array($this->getMethod(), $this->options->withoutBodyMethods);
+        return in_array($this->getMethod(), $this->context->withoutBodyMethods);
     }
 
     /**
@@ -416,7 +410,7 @@ class Stream implements CodecStreamInterface
     protected function prepare()
     {
         if ($this->messageStatus == static::MSG_HEAD_DONE) {
-            if (in_array(strtoupper($this->getMethod()), $this->options->withBodyMethods)) {
+            if (in_array(strtoupper($this->getMethod()), $this->context->withBodyMethods)) {
                 $this->messageStatus = static::MSG_BODY_WAITING;
             }
         }
@@ -430,16 +424,6 @@ class Stream implements CodecStreamInterface
             $this->bodyBuffer = fopen('php://temp', 'r+');
             $this->bodyLength = 0;
             $this->messageStatus = static::MSG_BODY_DOING;
-        }
-    }
-
-    /**
-     * @param callable $callback
-     */
-    private function triggerEvent($callback)
-    {
-        if ($callback) {
-            call_user_func($callback, $this);
         }
     }
 }
