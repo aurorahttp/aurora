@@ -3,15 +3,16 @@
 namespace Panlatent\Http\Message\Decoder;
 
 use Panlatent\Http\Message\Decoder;
+use Psr\Http\Message\ServerRequestInterface;
 
 interface AdapterInterface
 {
     /**
-     * Bind decoder and stream to this object.
+     * Returns a ServerRequest object via stream.
      *
      * @param Decoder $decoder
      * @param Stream  $stream
-     * @return bool True mean successful binding or false mean failed.
+     * @return ServerRequestInterface
      */
-    public function bind(Decoder $decoder, Stream $stream);
+    public function createServerRequest(Decoder $decoder, Stream $stream);
 }

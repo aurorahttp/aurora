@@ -46,11 +46,7 @@ class Decoder
      */
     public function decode(Stream $stream): ServerRequestInterface
     {
-        if (! $this->adapter->bind($this, $stream)) {
-            throw new DecoderException('Unable to bind adapter');
-        }
-
-        return $this->adapter->createServerRequest($stream->getMethod(), $stream->getUri());
+        return $this->adapter->createServerRequest($this, $stream);
     }
 
     /**
