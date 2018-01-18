@@ -46,8 +46,8 @@ class StreamContext extends Context
 
     public function bodyReady()
     {
-        if ($this->getBodyRead() !== null) {
-            call_user_func($this->getBodyRead());
+        if ($this->getBodyReady() !== null) {
+            call_user_func($this->getBodyReady());
         }
     }
 
@@ -75,21 +75,21 @@ class StreamContext extends Context
     /**
      * @var callable|null
      */
-    private $_bodyRead;
+    private $_bodyReady;
 
     /**
      * @return callable|null
      */
-    public function getBodyRead(): callable
+    public function getBodyReady(): callable
     {
-        return $this->_bodyRead;
+        return $this->_bodyReady;
     }
 
     /**
      * @param callable|null $bodyRead
      */
-    public function setBodyRead(callable $bodyRead)
+    public function setBodyReady(callable $bodyRead)
     {
-        $this->_bodyRead = $bodyRead;
+        $this->_bodyReady = $bodyRead;
     }
 }
