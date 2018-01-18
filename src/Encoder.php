@@ -26,11 +26,7 @@ class Encoder
      */
     public function encode(ResponseInterface $response): Stream
     {
-        if (! $this->adapter->bind($this, $response)) {
-            throw new DecoderException('Unable to bind adapter');
-        }
-
-        return $this->adapter->createStream();
+        return $this->getAdapter()->createStream($this, $response);
     }
 
     /**

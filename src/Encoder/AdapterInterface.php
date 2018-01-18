@@ -8,16 +8,11 @@ use Psr\Http\Message\ResponseInterface;
 interface AdapterInterface
 {
     /**
-     * Bind decoder and stream to this object.
+     * Returns a response decode stream.
      *
      * @param Encoder           $encoder
      * @param ResponseInterface $response
-     * @return bool True mean successful binding or false mean failed.
-     */
-    public function bind(Encoder $encoder, ResponseInterface $response);
-
-    /**
      * @return Stream
      */
-    public function createStream(): Stream;
+    public function createStream(Encoder $encoder, ResponseInterface $response): Stream;
 }

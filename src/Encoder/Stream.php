@@ -2,10 +2,11 @@
 
 namespace Panlatent\Http\Message\Encoder;
 
+use Panlatent\ContextSensitiveInterface;
 use Panlatent\Http\Message\CodecStreamInterface;
 use Psr\Http\Message\StreamInterface;
 
-class Stream implements CodecStreamInterface
+class Stream implements CodecStreamInterface, ContextSensitiveInterface
 {
     const MSG_LINE_WAITING = 1;
     const MSG_LINE_DOING = 2;
@@ -21,38 +22,37 @@ class Stream implements CodecStreamInterface
      */
     protected $messageStatus;
     /**
-     * @var StreamOptions
+     * @var StreamContext
      */
-    protected $options;
+    protected $context;
     /**
      * @var resource
      */
     protected $buffer;
     /**
-     * @var int
-     */
-    protected $bufferSize;
-    /**
      * @var StreamInterface
      */
     protected $bodyStream;
 
-
-    protected $bufferFlushEvent;
-
-    public function __construct(StreamOptions $options = null)
+    /**
+     * Stream constructor.
+     */
+    public function __construct()
     {
-        if ($options === null) {
-            $this->options = new StreamOptions();
-        } else {
-            $this->options = $options;
-        }
+        $this->context = new StreamContext();
         $this->messageStatus = static::MSG_LINE_WAITING;
     }
 
     public function write($content)
     {
         $this->prepare();
+
+        $writtenLength = fwrite($this->buffer, $content, $this->context->bufferSize);
+        if (ftell($this->buffer) >= $this->context->bufferSize) {
+            $this->context->bufferFlushReady();
+        }
+
+        return $writtenLength;
     }
 
     public function writeln($content = '')
@@ -137,6 +137,13 @@ class Stream implements CodecStreamInterface
         // TODO: Implement getMetadata() method.
     }
 
+    /**
+     * @return StreamContext
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
 
     public function getStatusCode()
     {
@@ -155,6 +162,8 @@ class Stream implements CodecStreamInterface
 
     protected function prepare()
     {
-
+        if ($this->messageStatus == static::MSG_LINE_WAITING) {
+            $this->buffer = fopen('php://memory', 'r+');
+        }
     }
 }

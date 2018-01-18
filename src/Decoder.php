@@ -46,7 +46,7 @@ class Decoder
      */
     public function decode(Stream $stream): ServerRequestInterface
     {
-        return $this->adapter->createServerRequest($this, $stream);
+        return $this->getAdapter()->createServerRequest($this, $stream);
     }
 
     /**
