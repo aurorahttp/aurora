@@ -294,11 +294,6 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
         return $this->bodyBuffer;
     }
 
-    public function __toString()
-    {
-        return '';
-    }
-
     public function close()
     {
         // TODO: Implement close() method.
@@ -411,6 +406,11 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
         }
 
         return in_array($this->getMethod(), $this->context->withoutBodyMethods);
+    }
+
+    public function __toString()
+    {
+        return '';
     }
 
     /**
