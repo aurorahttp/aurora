@@ -6,6 +6,7 @@ use Panlatent\Context;
 
 class StreamContext extends Context
 {
+
     public $bufferWriteSize = 1024;
 
     private $_bufferFlushReady;

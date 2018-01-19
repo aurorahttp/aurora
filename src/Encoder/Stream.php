@@ -17,6 +17,12 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
     const MSG_BODY_DOING = 8;
     const MSG_BODY_DONE = 9;
 
+    const MSG_READ_HEAD = 10;
+    const MSG_READ_BODY = 11;
+
+    const BUFFER_PHP_STREAM = 0;
+    const BUFFER_FILESYSTEM = 1;
+
     /**
      * @var int
      */
@@ -30,9 +36,9 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
      */
     protected $buffer;
     /**
-     * @var StreamInterface
+     * @var int
      */
-    protected $bodyStream;
+    protected $bufferType;
 
     /**
      * Stream constructor.
@@ -40,9 +46,14 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
     public function __construct()
     {
         $this->context = new StreamContext();
+        $this->bufferType = static::BUFFER_PHP_STREAM;
         $this->messageStatus = static::MSG_LINE_WAITING;
     }
 
+    /**
+     * @param string $content
+     * @return bool|int
+     */
     public function write($content)
     {
         $this->prepare();
@@ -59,6 +70,7 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
     {
         $this->write($content . static::HTTP_MESSAGE_LINE_ENDING);
         if ($this->messageStatus == static::MSG_LINE_WAITING) {
+
             $this->messageStatus = static::MSG_LINE_DOING;
         } elseif ($this->messageStatus == static::MSG_LINE_DOING ||
             $this->messageStatus == static::MSG_HEAD_WAITING) {
@@ -72,54 +84,73 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
         }
     }
 
-    public function withBodyStream(StreamInterface $stream)
+    /**
+     * @param resource $source
+     * @return int
+     */
+    public function writeStream($source)
     {
-        $this->bodyStream = $stream;
+        return stream_copy_to_stream($source, $this->buffer);
     }
 
-    public function __toString()
+    /**
+     * @param StreamInterface $stream
+     * @return int
+     */
+    public function writeBodyStream(StreamInterface $stream)
     {
-        return '';
+        $length = 0;
+        for ($stream->rewind(); ! $stream->eof(); ) {
+            for ($part = $stream->read(1024); $part !== ''; ) {
+                $writtenLength = fwrite($this->buffer, $part);
+                $part = substr($part, $writtenLength);
+                $length += $writtenLength;
+            }
+        }
+
+        return $length;
     }
 
     public function close()
     {
-        // TODO: Implement close() method.
+        return fclose($this->buffer);
     }
 
     public function detach()
     {
-        // TODO: Implement detach() method.
+        return $this->buffer;
     }
 
     public function getSize()
     {
-        // TODO: Implement getSize() method.
+        fseek($this->buffer, 0, SEEK_END);
+
+        return ftell($this->buffer);
     }
 
     public function tell()
     {
-        // TODO: Implement tell() method.
+        return ftell($this->buffer);
     }
 
     public function eof()
     {
-        // TODO: Implement eof() method.
+        return feof($this->buffer);
     }
 
     public function isSeekable()
     {
-        // TODO: Implement isSeekable() method.
+        return true;
     }
 
     public function seek($offset, $whence = SEEK_SET)
     {
-        // TODO: Implement seek() method.
+        return fseek($this->buffer, $offset, $whence);
     }
 
     public function rewind()
     {
-        // TODO: Implement rewind() method.
+        return rewind($this->buffer);
     }
 
     public function read($length)
@@ -129,14 +160,17 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
 
     public function getContents()
     {
-        return $this->getBufferContent()
-            .  static::HTTP_MESSAGE_HEADER_ENDING
-            . $this->bodyStream->getContents();
+        $contents = '';
+        for ($this->rewind(); ! $this->eof(); ) {
+            $contents .= $this->read(1024);
+        }
+
+        return $contents;
     }
 
     public function getMetadata($key = null)
     {
-        // TODO: Implement getMetadata() method.
+        return null;
     }
 
     /**
@@ -148,26 +182,19 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
     }
 
     /**
-     * @return resource
+     * @return int
      */
-    public function getBuffer(): resource
+    public function getBufferType(): int
     {
-        return $this->buffer;
+        return $this->bufferType;
     }
 
-    public function getBufferContent()
+    /**
+     * @param int $bufferType
+     */
+    public function setBufferType(int $bufferType)
     {
-        $content = '';
-        for (fseek($this->buffer, 0); ! feof($this->buffer); ) {
-            $content .= fread($this->buffer, $this->context->bufferWriteSize);
-        }
-
-        return $content;
-    }
-
-    public function getStatusCode()
-    {
-        return 200;
+        $this->bufferType = $bufferType;
     }
 
     public function isReadable()
@@ -180,10 +207,19 @@ class Stream implements CodecStreamInterface, ContextSensitiveInterface
         return false;
     }
 
+    public function __toString()
+    {
+        return $this->getContents();
+    }
+
     protected function prepare()
     {
         if ($this->messageStatus == static::MSG_LINE_WAITING) {
-            $this->buffer = fopen('php://memory', 'r+');
+            if ($this->bufferType == static::BUFFER_PHP_STREAM) {
+                $this->buffer = fopen('php://temp', 'r+');
+            } else {
+                $this->buffer = tmpfile();
+            }
         }
     }
 }
