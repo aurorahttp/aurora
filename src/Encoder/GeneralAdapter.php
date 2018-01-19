@@ -22,7 +22,7 @@ class GeneralAdapter implements AdapterInterface
             $stream->writeln($key . ': ' . $response->getHeaderLine($key) . "\r\n");
         }
         $stream->writeln();
-        $stream->withBodyStream($response->getBody());
+        $stream->writeBodyStream($response->getBody());
 
         return $stream;
     }
