@@ -16,3 +16,6 @@ matrix:
   allow_failures:
     - php: hhvm
   fast_finish: true
+
+notifications:
+  slack: aurorahttp:wGWbQl8iGhUyxqDHSsfLqtAd
