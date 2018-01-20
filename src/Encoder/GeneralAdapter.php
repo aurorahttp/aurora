@@ -18,7 +18,7 @@ class GeneralAdapter implements AdapterInterface
             ]));
 
         foreach (array_keys($response->getHeaders()) as $key) {
-            $stream->writeln($key . ': ' . $response->getHeaderLine($key) . "\r\n");
+            $stream->writeln($key . ': ' . $response->getHeaderLine($key));
         }
         $stream->writeln();
         $stream->writeBodyStream($response->getBody());
