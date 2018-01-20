@@ -10,7 +10,11 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
 
-script: vendor/bin/phpunit --verbose
+script: 
+  - vendor/bin/phpunit --verbose
+
+after_script:
+  - vendor/bin/coveralls
 
 matrix:
   allow_failures:
