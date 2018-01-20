@@ -1,12 +1,12 @@
 HTTP Message Codec
 ==================
 [![Build Status](https://travis-ci.org/aurorahttp/http-message-codec.svg)](https://travis-ci.org/aurorahttp/http-message-codec)
-[![Coverage Status](https://coveralls.io/repos/github/aurora/http-message-codec/badge.svg?branch=master)](https://coveralls.io/github/aurora/http-message-codec?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/aurorahttp/http-message-codec/badge.svg?branch=master)](https://coveralls.io/github/aurorahttp/http-message-codec?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/aurora/http-message-codec/v/stable.svg)](https://packagist.org/packages/aurora/http-message-codec)
 [![Total Downloads](https://poser.pugx.org/aurora/http-message-codec/downloads.svg)](https://packagist.org/packages/aurora/http-message-codec) 
 [![Latest Unstable Version](https://poser.pugx.org/aurora/http-message-codec/v/unstable.svg)](https://packagist.org/packages/aurora/http-message-codec)
 [![License](https://poser.pugx.org/aurora/http-message-codec/license.svg)](https://packagist.org/packages/aurora/http-message-codec)
-[![Aurora Http](https://img.shields.io/badge/Powered_by-Aurora_Http-green.svg?style=flat)](https://aurora.com/)
+[![Aurora Http](https://img.shields.io/badge/Powered_by-Aurora_Http-green.svg?style=flat)](https://aurorahttp.com/)
 
 Decode raw request message and encode PRS-7 response object.
 
