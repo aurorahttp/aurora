@@ -2,9 +2,9 @@
 
 namespace Aurora\Http\Message\Decoder;
 
-use Panlatent\Context;
+use Panlatent\Context\AttributeContext;
 
-class StreamContext extends Context
+class StreamContext extends AttributeContext
 {
     /**
      * @var int Allow http method length.

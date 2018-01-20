@@ -2,8 +2,8 @@
 
 namespace Aurora\Http\Message\Encoder;
 
-use Panlatent\ContextSensitiveInterface;
 use Aurora\Http\Message\CodecStreamInterface;
+use Panlatent\Context\ContextSensitiveInterface;
 use Psr\Http\Message\StreamInterface;
 
 class Stream implements CodecStreamInterface, ContextSensitiveInterface

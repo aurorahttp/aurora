@@ -2,9 +2,9 @@
 
 namespace Aurora\Http\Message\Encoder;
 
-use Panlatent\Context;
+use Panlatent\Context\AttributeContext;
 
-class StreamContext extends Context
+class StreamContext extends AttributeContext
 {
 
     public $bufferWriteSize = 1024;

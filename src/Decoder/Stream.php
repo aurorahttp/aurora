@@ -3,9 +3,9 @@
 namespace Aurora\Http\Message\Decoder;
 
 use BadMethodCallException;
-use Panlatent\ContextSensitiveInterface;
 use Aurora\Http\Message\CodecStreamInterface;
 use Aurora\Http\Message\Decoder\Stream\WriteException;
+use Panlatent\Context\ContextSensitiveInterface;
 
 class Stream implements CodecStreamInterface, ContextSensitiveInterface
 {
