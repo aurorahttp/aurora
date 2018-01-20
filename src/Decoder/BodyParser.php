@@ -1,6 +1,6 @@
 <?php
 
-namespace Panlatent\Http\Message\Decoder;
+namespace Aurora\Http\Message\Decoder;
 
 abstract class BodyParser implements BodyParserInterface
 {

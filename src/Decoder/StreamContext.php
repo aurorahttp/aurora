@@ -1,6 +1,6 @@
 <?php
 
-namespace Panlatent\Http\Message\Decoder;
+namespace Aurora\Http\Message\Decoder;
 
 use Panlatent\Context;
 
@@ -39,33 +39,25 @@ class StreamContext extends Context
 
     public function headerReady()
     {
-        if ($this->getHeaderReady() !== null) {
-            call_user_func($this->getHeaderReady());
+        if ($this->_headerReady !== null) {
+            call_user_func($this->_headerReady);
         }
     }
 
     public function bodyReady()
     {
-        if ($this->getBodyReady() !== null) {
-            call_user_func($this->getBodyReady());
+        if ($this->_bodyReady !== null) {
+            call_user_func($this->_bodyReady);
         }
     }
 
     /**
-     * @var callable|null
+     * @var callable
      */
     private $_headerReady;
 
     /**
-     * @return callable|null
-     */
-    public function getHeaderReady(): callable
-    {
-        return $this->_headerReady;
-    }
-
-    /**
-     * @param callable|null $headerReady
+     * @param callable $headerReady
      */
     public function setHeaderReady(callable $headerReady)
     {
@@ -73,20 +65,12 @@ class StreamContext extends Context
     }
 
     /**
-     * @var callable|null
+     * @var callable
      */
     private $_bodyReady;
 
     /**
-     * @return callable|null
-     */
-    public function getBodyReady(): callable
-    {
-        return $this->_bodyReady;
-    }
-
-    /**
-     * @param callable|null $bodyRead
+     * @param callable $bodyRead
      */
     public function setBodyReady(callable $bodyRead)
     {

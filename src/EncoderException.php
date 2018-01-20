@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlatent\Http\Message;
+namespace Aurora\Http\Message;
 
-use Panlatent\Http\Message\Encoder\AdapterInterface;
+use Aurora\Http\Message\Encoder\AdapterInterface;
 use RuntimeException;
 
 class EncoderException extends RuntimeException

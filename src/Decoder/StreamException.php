@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlatent\Http\Message\Decoder;
+namespace Aurora\Http\Message\Decoder;
 
-use Panlatent\Http\Message\DecoderException;
+use Aurora\Http\Message\DecoderException;
 
 class StreamException extends DecoderException
 {

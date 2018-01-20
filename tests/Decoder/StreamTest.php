@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests;
+namespace Decoder;
 
-use Panlatent\Http\Message\Decoder\MessageBodyException;
-use Panlatent\Http\Message\Decoder\Stream;
+use Aurora\Http\Message\Decoder\MessageBodyException;
+use Aurora\Http\Message\Decoder\Stream;
 use PHPUnit\Framework\TestCase;
 
-class RequestStreamTest extends TestCase
+class StreamTest extends TestCase
 {
     public function testWriteViaGet()
     {
-        $stream = $this->getRequestStream();
+        $stream = $this->getStream();
         $this->assertEquals(Stream::MSG_HEAD_DOING, $stream->getMessageStatus());
         $this->assertAttributeNotEmpty('lineBuffer', $stream);
         $this->assertAttributeNotEmpty('headerBuffer', $stream);
@@ -19,32 +19,32 @@ class RequestStreamTest extends TestCase
 
     public function testGetMethod()
     {
-        $stream = $this->getRequestStream();
+        $stream = $this->getStream();
         $this->assertEquals('GET', $stream->getMethod());
     }
 
     public function testGetUri()
     {
-        $stream = $this->getRequestStream();
+        $stream = $this->getStream();
         $this->assertEquals('/', $stream->getUri());
     }
 
     public function testGetVersion()
     {
-        $stream = $this->getRequestStream();
+        $stream = $this->getStream();
         $this->assertEquals('HTTP/1.1', $stream->getVersion());
     }
 
     public function testGetHeaders()
     {
-        $stream = $this->getRequestStream();
+        $stream = $this->getStream();
         $headers = $stream->getHeaders();
         $this->assertCount(9, $headers);
     }
 
     public function testGetStandardHeaders()
     {
-        $stream = $this->getRequestStream();
+        $stream = $this->getStream();
         $headers = $stream->getStandardHeaders();
         $this->assertArrayHasKey('Host', $headers);
         $this->assertEquals('www.laruence.com', $headers['Host']);
@@ -63,10 +63,13 @@ class RequestStreamTest extends TestCase
         $this->assertEquals('', $stream->getBodyStream());
     }
 
-    private function getRequestStream()
+    /**
+     * @return Stream
+     */
+    private function getStream()
     {
         $stream = new Stream();
-        $fp = fopen(__DIR__ . '/data/request_get.http', 'r');
+        $fp = fopen(__DIR__ . '/../_data/request_get.http', 'r');
         for (; ! feof($fp);) {
             $part = fread($fp, 30);
             $length = 0;

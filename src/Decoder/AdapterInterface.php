@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlatent\Http\Message\Decoder;
+namespace Aurora\Http\Message\Decoder;
 
-use Panlatent\Http\Message\Decoder;
+use Aurora\Http\Message\Decoder;
 use Psr\Http\Message\ServerRequestInterface;
 
 interface AdapterInterface

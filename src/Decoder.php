@@ -1,10 +1,10 @@
 <?php
 
-namespace Panlatent\Http\Message;
+namespace Aurora\Http\Message;
 
-use Panlatent\Http\Message\Decoder\AdapterInterface;
-use Panlatent\Http\Message\Decoder\Context;
-use Panlatent\Http\Message\Decoder\Stream;
+use Aurora\Http\Message\Decoder\AdapterInterface;
+use Aurora\Http\Message\Decoder\Context;
+use Aurora\Http\Message\Decoder\Stream;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**

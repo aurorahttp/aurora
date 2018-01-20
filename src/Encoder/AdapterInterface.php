@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlatent\Http\Message\Encoder;
+namespace Aurora\Http\Message\Encoder;
 
-use Panlatent\Http\Message\Encoder;
+use Aurora\Http\Message\Encoder;
 use Psr\Http\Message\ResponseInterface;
 
 interface AdapterInterface

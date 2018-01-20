@@ -1,6 +1,6 @@
 <?php
 
-namespace Panlatent\Http\Message\Encoder;
+namespace Aurora\Http\Message\Encoder;
 
 use Panlatent\Context;
 

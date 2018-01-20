@@ -1,9 +1,9 @@
 <?php
 
-namespace Panlatent\Http\Message\Encoder;
+namespace Aurora\Http\Message\Encoder;
 
 use Panlatent\ContextSensitiveInterface;
-use Panlatent\Http\Message\CodecStreamInterface;
+use Aurora\Http\Message\CodecStreamInterface;
 use Psr\Http\Message\StreamInterface;
 
 class Stream implements CodecStreamInterface, ContextSensitiveInterface

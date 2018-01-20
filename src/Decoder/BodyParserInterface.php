@@ -1,6 +1,6 @@
 <?php
 
-namespace Panlatent\Http\Message\Decoder;
+namespace Aurora\Http\Message\Decoder;
 
 use Psr\Http\Message\StreamInterface;
 

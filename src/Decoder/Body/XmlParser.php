@@ -1,9 +1,9 @@
 <?php
 
-namespace Panlatent\Http\Message\Parser;
+namespace Aurora\Http\Message\Parser;
 
-use Panlatent\Http\Message\Decoder\BodyParser;
-use Panlatent\Http\Message\Decoder\Stream;
+use Aurora\Http\Message\Decoder\BodyParser;
+use Aurora\Http\Message\Decoder\Stream;
 use Psr\Http\Message\StreamInterface;
 
 class XmlParser extends BodyParser
