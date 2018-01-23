@@ -1,8 +1,8 @@
 <?php
 
-namespace Aurora\Http\Handler\Tests;
+namespace Aurora\Handler\Tests;
 
-class Handler implements \Aurora\Http\Handler\HandlerInterface
+class Handler implements \Aurora\Handler\HandlerInterface
 {
     public $number;
 
@@ -11,7 +11,7 @@ class Handler implements \Aurora\Http\Handler\HandlerInterface
         $this->number = $number;
     }
 
-    public function handle($request, \Aurora\Http\Handler\HandlerInterface $handler)
+    public function handle($request, \Aurora\Handler\HandlerInterface $handler)
     {
         return $handler->handle($request . $this->number, $handler);
     }

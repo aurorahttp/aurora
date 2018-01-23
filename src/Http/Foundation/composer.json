@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Aurora\\Http\\": "src/"
+            "Aurora\\Http\\": ""
         }
     },
     "extra": {

@@ -22,7 +22,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Aurora\\Http\\Message\\Codec\\": "src/"
+            "Aurora\\Http\\Codec\\": ""
         }
     },
     "extra": {

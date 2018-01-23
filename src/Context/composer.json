@@ -20,12 +20,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Aurora\\Context\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Aurora\\Context\\Tests\\": "tests/"
+            "Aurora\\Context\\": ""
         }
     },
     "extra": {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Aurora\Http\Handler\Tests;
+namespace Aurora\Handler\Tests;
 
-use Aurora\Http\Handler\Bundle\ListBundle;
+use Aurora\Handler\Bundle\ListBundle;
 use PHPUnit\Framework\TestCase;
 
 class HandlerBundleTest extends TestCase

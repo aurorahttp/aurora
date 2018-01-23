@@ -1,8 +1,8 @@
 <?php
 
-namespace Aurora\Http\Handler\Tests;
+namespace Aurora\Handler\Tests;
 
-use Aurora\Http\Handler\Bundle\PriorityBundle;
+use Aurora\Handler\Bundle\PriorityBundle;
 use PHPUnit\Framework\TestCase;
 
 class PriorityBundleTest extends TestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace Aurora\Http\Handler\Tests;
+namespace Aurora\Handler\Tests;
 
-use Aurora\Http\Handler\ClosureHandler;
-use Aurora\Http\Handler\HandlerInterface;
+use Aurora\Handler\ClosureHandler;
+use Aurora\Handler\HandlerInterface;
 use PHPUnit\Framework\TestCase;
 
 class ClosureHandlerTest extends TestCase

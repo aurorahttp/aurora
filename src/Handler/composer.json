@@ -22,12 +22,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Aurora\\Http\\Handler\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Aurora\\Http\\Handler\\Tests\\": "tests/"
+            "Aurora\\Handler\\": ""
         }
     },
     "extra": {

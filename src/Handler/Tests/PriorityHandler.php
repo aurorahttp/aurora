@@ -1,9 +1,9 @@
 <?php
 
-namespace Aurora\Http\Handler\Tests;
+namespace Aurora\Handler\Tests;
 
-use Aurora\Http\Handler\HandlerInterface;
-use Aurora\Http\Handler\PriorityInterface;
+use Aurora\Handler\HandlerInterface;
+use Aurora\Handler\PriorityInterface;
 
 class PriorityHandler implements HandlerInterface, PriorityInterface
 {
