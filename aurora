@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Aurora
+ *
+ * @author Panlatent <panlatent@gmail.com>
+ */
+
+use Aurora\Console\Application;
+use Aurora\Console\Command\RunCommand;
+
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/src/Aurora.php';
+
+$app = new Application(Aurora::NAME, Aurora::VERSION);
+$app->add(new RunCommand());
+$app->setDefaultCommand('run');
+$app->run();

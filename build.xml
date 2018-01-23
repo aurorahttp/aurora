@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Aurora" default="build">
+    <target name="build">
+        <echo>Build Test</echo>
+    </target>
+    <target name="clear">
+        <echo>Clear logs</echo>
+        <delete>
+            <fileset dir="runtime">
+                <include name="*.log"/>
+            </fileset>
+        </delete>
+    </target>
+</project>

@@ -1,0 +1,35 @@
+{
+    "name": "aurora/server",
+    "description": "Server application",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "symfony/yaml": "~3.4",
+        "symfony/process": "~3.4",
+        "symfony/event-dispatcher": "~3.4",
+        "symfony/options-resolver": "~3.4",
+        "monolog/monolog": "^1.23"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "php-coveralls/php-coveralls": "^2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "panlatent",
+            "email": "panlatent@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aurora\\Server\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
