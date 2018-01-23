@@ -1,0 +1,34 @@
+{
+    "name": "aurora/http-message",
+    "description": "A HTTP Message library that implements the Psr-7 standard",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "panlatent",
+            "email": "panlatent@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0",
+        "psr/http-message": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aurora\\Http\\Message\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    },
+    "suggests": {
+        "aurorahttp/http-foundation": "This library covers HTTP status code, method and exception",
+        "fig/http-message-util": "Http message util"
+    }
+}

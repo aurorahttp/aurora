@@ -8,7 +8,19 @@
     "require-dev": {
         "codeception/codeception": "^2.3",
         "php-coveralls/php-coveralls": "^2.0",
-        "phing/phing": "^2.16"
+        "phing/phing": "^2.16",
+        "wikimedia/composer-merge-plugin": "~1.3"
+    },
+    "replace": {
+        "aurora/context": "self.version",
+        "aurora/handler": "self.version",
+        "aurora/http-codec": "self.version",
+        "aurora/http-connection": "self.version",
+        "aurora/http-foundation": "self.version",
+        "aurora/http-message": "self.version",
+        "aurora/http-server": "self.version",
+        "aurora/http-session": "self.version",
+        "aurora/http-transaction": "self.version"
     },
     "license": "MIT",
     "authors": [
@@ -26,6 +38,13 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.1.x-dev"
+        },
+        "merge-plugin": {
+            "require": [
+                "src/*/composer.json",
+                "src/*/*/composer.json"
+            ],
+            "merger-dev": true
         }
     }
 }

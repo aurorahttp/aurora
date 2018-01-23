@@ -1,0 +1,38 @@
+{
+    "name": "aurora/http-handler",
+    "description": "Http handler interfaces",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "psr/http-message": "~1.0",
+        "panlatent/context": "~1.0",
+        "aurora/http-foundation": "~0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "php-coveralls/php-coveralls": "^2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "panlatent",
+            "email": "panlatent@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aurora\\Http\\Handler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aurora\\Http\\Handler\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
