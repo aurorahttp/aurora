@@ -11,8 +11,8 @@
          syntaxCheck="false">
     <testsuite name="Aurora Test Suite">
         <directory>./tests/</directory>
-        <directory>./src/*/tests/</directory>
-        <directory>./src/*/*/tests</directory>
+        <directory>./src/*/Tests/</directory>
+        <directory>./src/*/*/Tests/</directory>
     </testsuite>
     <filter>
         <whitelist>

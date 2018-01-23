@@ -19,7 +19,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Aurora\\Http\\Connection\\": "src/"
+            "Aurora\\Http\\Connection\\": ""
         }
     },
     "extra": {
