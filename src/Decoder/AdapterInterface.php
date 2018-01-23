@@ -1,8 +1,8 @@
 <?php
 
-namespace Aurora\Http\Message\Decoder;
+namespace Aurora\Http\Message\Codec\Decoder;
 
-use Aurora\Http\Message\Decoder;
+use Aurora\Http\Message\Codec\Decoder;
 use Psr\Http\Message\ServerRequestInterface;
 
 interface AdapterInterface

@@ -25,6 +25,21 @@ This will install the library and all required dependencies. The library require
 Usage
 -----
 
+Decode raw Http message content to a request object:
+```php
+$stream = new Aurora\Http\Message\Decoder\Stream();
+$stream = $stream->write($rawHttpMessage);
+
+$decoder = new Aurora\Http\Message\Decoder();
+$serverRequest = $decoder->decode($stream);
+```
+
+Encode a response object to stream:
+```php
+$encoder = new Aurora\Http\Message\Encoder();
+$stream = $encoder->encode($response);
+```
+
 License
 -------
 The HTTP Message Codec is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

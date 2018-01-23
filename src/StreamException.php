@@ -4,7 +4,7 @@ namespace Aurora\Http\Message\Codec;
 
 use RuntimeException;
 
-class DecoderException extends RuntimeException
+class StreamException extends RuntimeException
 {
 
 }

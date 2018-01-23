@@ -1,10 +1,10 @@
 <?php
 
-namespace Aurora\Http\Message\Decoder;
+namespace Aurora\Http\Message\Codec\Decoder;
 
 use BadMethodCallException;
 use Aurora\Http\Message\CodecStreamInterface;
-use Aurora\Http\Message\Decoder\Stream\WriteException;
+use Aurora\Http\Message\Codec\Decoder\Stream\WriteException;
 use Panlatent\Context\ContextSensitiveInterface;
 
 class Stream implements CodecStreamInterface, ContextSensitiveInterface

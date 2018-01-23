@@ -1,6 +1,6 @@
 <?php
 
-namespace Aurora\Http\Message\Encoder;
+namespace Aurora\Http\Message\Codec\Eecoder;
 
 use Aurora\Http\Message\CodecStreamInterface;
 use Panlatent\Context\ContextSensitiveInterface;

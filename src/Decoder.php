@@ -1,6 +1,6 @@
 <?php
 
-namespace Aurora\Http\Message;
+namespace Aurora\Http\Message\Codec;
 
 use Aurora\Http\Message\Decoder\AdapterInterface;
 use Aurora\Http\Message\Decoder\Context;

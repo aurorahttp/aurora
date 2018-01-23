@@ -1,8 +1,8 @@
 <?php
 
-namespace Aurora\Http\Message\Encoder;
+namespace Aurora\Http\Message\Codec\Eecoder;
 
-use Aurora\Http\Message\Encoder;
+use Aurora\Http\Message\Codec\Eecoder;
 use Psr\Http\Message\ResponseInterface;
 
 interface AdapterInterface
