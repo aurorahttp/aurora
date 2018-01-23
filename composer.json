@@ -1,0 +1,30 @@
+{
+    "name": "aurora/aurora",
+    "description": "Http server",
+    "type": "project",
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.3",
+        "php-coveralls/php-coveralls": "^2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "panlatent",
+            "email": "panlatent@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aurora\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
