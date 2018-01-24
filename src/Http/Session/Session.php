@@ -2,17 +2,15 @@
 
 namespace Aurora\Http\Session;
 
+use Aurora\Event\SafeClosureEvent;
 use Aurora\Http\Connection\ClientConnection;
 use Aurora\Http\Handler\ClosureHandler;
 use Aurora;
-use Aurora\Adapter\GuzzleDecodeAdapter;
-use Aurora\Event\TransactionEvent;
-use Aurora\Middleware\GuzzleBridgeMiddleware;
 use Ev;
 use Aurora\Http\Client\LengthRequiredException;
-use Aurora\Http\Message\Decoder;
-use Aurora\Http\Message\Decoder\Stream;
-use Aurora\Http\Message\Encoder;
+use Aurora\Http\Codec\Decoder;
+use Aurora\Http\Codec\Decoder\Stream;
+use Aurora\Http\Codec\Encoder;
 use Aurora\Http\Transaction\Transaction;
 use EvIo;
 use Psr\Http\Message\ResponseInterface;
@@ -56,7 +54,7 @@ class Session
         stream_set_blocking($connection->getSocket(), 0);
         Aurora::debug("connection created from {$connection->getAddress()}:{$connection->getPort()}");
 
-        $this->socketReadEvent = new EvIo($connection->getSocket(), Ev::READ, new SafeCallback(function () {
+        $this->socketReadEvent = new EvIo($connection->getSocket(), Ev::READ, new SafeClosureEvent(function () {
             $this->onRead();
         }));
 
