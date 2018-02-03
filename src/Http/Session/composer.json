@@ -1,0 +1,35 @@
+{
+    "name": "aurora/http-session",
+    "description": "HTTP transaction container, including connection management and HTTP message codec",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "psr/http-message": "~1.0",
+        "panlatent/context": "~1.0",
+        "aurora/http-connection": "~0.1",
+        "aurora/http-message-codec": "~0.1",
+        "aurora/http-transaction": "~0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "php-coveralls/php-coveralls": "^2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "panlatent",
+            "email": "panlatent@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aurora\\Http\\Session\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
