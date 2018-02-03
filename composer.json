@@ -19,15 +19,15 @@
             "email": "panlatent@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Aurora\\Http\\Message\\Codec\\": "src/"
+            "Aurora\\Http\\Codec\\": ""
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }

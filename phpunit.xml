@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false">
-    <testsuite name="Http Message Codec Test Suite">
+    <testsuite name="Http Message Test Suite">
         <directory>./tests/</directory>
     </testsuite>
     <filter>
