@@ -1,5 +1,5 @@
 {
-    "name": "aurora/http-message-codec",
+    "name": "aurora/http-codec",
     "description": "Decode raw request message and encode raw response message",
     "type": "library",
     "require": {
