@@ -1,0 +1,34 @@
+{
+    "name": "aurora/http-server",
+    "description": "HTTP server",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "psr/http-message": "~1.0",
+        "psr/http-server-middleware": "~1.0",
+        "psr/http-server-handler": "~1.0",
+        "aurora/http-foundation": "~0.1"
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "panlatent",
+            "email": "panlatent@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aurora\\Http\\Server\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
